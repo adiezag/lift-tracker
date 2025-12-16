@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LiftService from "../services/LiftService"; // Add this import at top
+import LiftService from "../services/LiftService";
 
 export default function LiftLogger({ onLiftAdded }) {
   const [liftType, setLiftType] = useState("squat");
@@ -9,43 +9,6 @@ export default function LiftLogger({ onLiftAdded }) {
   const [notes, setNotes] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setError("");
-  //   setSuccess(false);
-
-  //   if (!weight || !reps) {
-  //     setError("Weight and reps are required");
-  //     return;
-  //   }
-
-  //   if (parseFloat(weight) <= 0 || parseInt(reps) <= 0) {
-  //     setError("Weight and reps must be positive numbers");
-  //     return;
-  //   }
-
-  //   const liftData = {
-  //     lift_type: liftType,
-  //     weight: parseFloat(weight),
-  //     reps: parseInt(reps),
-  //     date: date,
-  //     notes: notes.trim() || null,
-  //   };
-
-  //   console.log("Submitting lift:", liftData);
-
-  //   setSuccess(true);
-  //   setWeight("");
-  //   setReps("");
-  //   setNotes("");
-
-  //   if (onLiftAdded) {
-  //     onLiftAdded(liftData);
-  //   }
-
-  //   setTimeout(() => setSuccess(false), 3000);
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,39 +50,46 @@ export default function LiftLogger({ onLiftAdded }) {
       console.error(err);
     }
   };
+
   const containerStyle = {
-    backgroundColor: "#1e293b",
-    borderRadius: "8px",
-    padding: "24px",
-    maxWidth: "448px",
+    backgroundColor: "white",
+    border: "1px solid #e5e7eb",
+    borderRadius: "4px",
+    padding: "32px",
+    maxWidth: "480px",
     margin: "0 auto",
+    fontFamily: "monospace",
   };
 
   const headingStyle = {
-    fontSize: "24px",
-    fontWeight: "bold",
+    fontSize: "18px",
+    fontWeight: "normal",
     marginBottom: "24px",
-    color: "white",
+    color: "#000",
+    letterSpacing: "0.5px",
   };
 
   const labelStyle = {
     display: "block",
-    fontSize: "14px",
-    fontWeight: "600",
-    marginBottom: "8px",
-    color: "white",
+    fontSize: "12px",
+    fontWeight: "normal",
+    marginBottom: "6px",
+    color: "#6b7280",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
   };
 
   const inputStyle = {
     width: "100%",
-    backgroundColor: "#334155",
-    border: "1px solid #475569",
-    borderRadius: "4px",
-    padding: "8px 16px",
-    color: "white",
-    fontSize: "16px",
-    marginBottom: "16px",
+    backgroundColor: "#f9fafb",
+    border: "1px solid #d1d5db",
+    borderRadius: "2px",
+    padding: "10px 12px",
+    color: "#000",
+    fontSize: "14px",
+    marginBottom: "20px",
     boxSizing: "border-box",
+    fontFamily: "monospace",
   };
 
   const selectStyle = {
@@ -130,50 +100,53 @@ export default function LiftLogger({ onLiftAdded }) {
   const textareaStyle = {
     ...inputStyle,
     resize: "none",
-    fontFamily: "inherit",
+    fontFamily: "monospace",
   };
 
   const buttonStyle = {
     width: "100%",
-    backgroundColor: "#2563eb",
+    backgroundColor: "#000",
     color: "white",
-    fontWeight: "600",
+    fontWeight: "normal",
     padding: "12px",
-    borderRadius: "4px",
+    borderRadius: "2px",
     border: "none",
     cursor: "pointer",
-    fontSize: "16px",
-    transition: "background-color 0.2s",
+    fontSize: "13px",
+    fontFamily: "monospace",
+    letterSpacing: "1px",
+    textTransform: "uppercase",
   };
 
   const errorStyle = {
-    backgroundColor: "rgba(127, 29, 29, 0.5)",
-    border: "1px solid #dc2626",
-    borderRadius: "4px",
-    padding: "12px",
-    marginBottom: "16px",
+    backgroundColor: "#fef2f2",
+    border: "1px solid #fca5a5",
+    borderRadius: "2px",
+    padding: "10px",
+    marginBottom: "20px",
   };
 
   const successStyle = {
-    backgroundColor: "rgba(20, 83, 45, 0.5)",
-    border: "1px solid #16a34a",
-    borderRadius: "4px",
-    padding: "12px",
-    marginBottom: "16px",
+    backgroundColor: "#f0fdf4",
+    border: "1px solid #86efac",
+    borderRadius: "2px",
+    padding: "10px",
+    marginBottom: "20px",
   };
 
   const messageTextStyle = {
-    fontSize: "14px",
+    fontSize: "13px",
     margin: 0,
+    fontFamily: "monospace",
   };
 
   return (
     <div style={containerStyle}>
-      <h2 style={headingStyle}>Log Lift</h2>
+      <h2 style={headingStyle}>LOG LIFT</h2>
 
       <div>
         <div>
-          <label style={labelStyle}>Exercise</label>
+          <label style={labelStyle}>EXERCISE</label>
           <select
             value={liftType}
             onChange={(e) => setLiftType(e.target.value)}
@@ -187,7 +160,7 @@ export default function LiftLogger({ onLiftAdded }) {
         </div>
 
         <div>
-          <label style={labelStyle}>Weight (lbs)</label>
+          <label style={labelStyle}>WEIGHT (LBS)</label>
           <input
             type="number"
             step="0.01"
@@ -199,7 +172,7 @@ export default function LiftLogger({ onLiftAdded }) {
         </div>
 
         <div>
-          <label style={labelStyle}>Reps</label>
+          <label style={labelStyle}>REPS</label>
           <input
             type="number"
             value={reps}
@@ -210,7 +183,7 @@ export default function LiftLogger({ onLiftAdded }) {
         </div>
 
         <div>
-          <label style={labelStyle}>Date</label>
+          <label style={labelStyle}>DATE</label>
           <input
             type="date"
             value={date}
@@ -220,7 +193,7 @@ export default function LiftLogger({ onLiftAdded }) {
         </div>
 
         <div>
-          <label style={labelStyle}>Notes (optional)</label>
+          <label style={labelStyle}>NOTES (OPTIONAL)</label>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
@@ -232,14 +205,14 @@ export default function LiftLogger({ onLiftAdded }) {
 
         {error && (
           <div style={errorStyle}>
-            <p style={{ ...messageTextStyle, color: "#fca5a5" }}>{error}</p>
+            <p style={{ ...messageTextStyle, color: "#dc2626" }}>{error}</p>
           </div>
         )}
 
         {success && (
           <div style={successStyle}>
-            <p style={{ ...messageTextStyle, color: "#86efac" }}>
-              Lift logged successfully!
+            <p style={{ ...messageTextStyle, color: "#16a34a" }}>
+              Lift logged successfully
             </p>
           </div>
         )}
@@ -247,10 +220,10 @@ export default function LiftLogger({ onLiftAdded }) {
         <button
           onClick={handleSubmit}
           style={buttonStyle}
-          onMouseOver={(e) => (e.target.style.backgroundColor = "#1d4ed8")}
-          onMouseOut={(e) => (e.target.style.backgroundColor = "#2563eb")}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#374151")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "#000")}
         >
-          Log Lift
+          SUBMIT
         </button>
       </div>
     </div>

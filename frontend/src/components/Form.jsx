@@ -5,8 +5,8 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import "../styles/Form.css";
 
 function Form({ route, method }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState(method === "login" ? "guest" : "");
+  const [password, setPassword] = useState(method === "login" ? "guest25" : "");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -43,6 +43,26 @@ function Form({ route, method }) {
       </h1>
 
       <h2 style={{ textAlign: "center", marginBottom: "24px" }}>{name}</h2>
+
+      {method === "login" && (
+        <div
+          style={{
+            backgroundColor: "#e7ede7ff",
+            border: "1px solid #000000",
+            borderRadius: "5px",
+            padding: "10px 15px",
+            marginBottom: "15px",
+            fontSize: "14px",
+            color: "#000000",
+            textAlign: "center",
+            fontFamily: "monospace",
+          }}
+        >
+          <strong>🎯 For Recruiters: </strong> Demo credentials pre-filled for
+          quick access
+        </div>
+      )}
+
       <input
         className="form-input"
         type="text"

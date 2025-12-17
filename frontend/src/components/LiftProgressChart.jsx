@@ -207,13 +207,16 @@ export default function LiftProgressChart({ refreshTrigger }) {
             {getLiftDisplayName(selectedLift)} - Estimated 1RM Progress
           </h3>
           <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={lifts}>
+            {/* <LineChart data={lifts}>
               <CartesianGrid strokeDasharray="3 3" stroke="#d1d5db" />
               <XAxis
                 dataKey="date"
                 stroke="#6b7280"
                 tick={{ fill: "#6b7280", fontFamily: "monospace" }}
+                interval="preserveEnd"
+                tickMargin={12}
               />
+
               <YAxis
                 stroke="#6b7280"
                 tick={{ fill: "#6b7280", fontFamily: "monospace" }}
@@ -241,6 +244,47 @@ export default function LiftProgressChart({ refreshTrigger }) {
                 strokeWidth={3}
                 dot={{ fill: "#000", r: 5 }}
                 activeDot={{ r: 7 }}
+              />
+            </LineChart> */}
+            <LineChart
+              data={lifts}
+              margin={{ top: 20, right: 40, left: 40, bottom: 20 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="#d1d5db" />
+
+              <XAxis
+                dataKey="date"
+                stroke="#6b7280"
+                interval="preserveEnd"
+                tickMargin={12}
+              />
+
+              <YAxis
+                stroke="#6b7280"
+                label={{
+                  value: "1RM (lbs)",
+                  angle: -90,
+                  position: "insideLeft",
+                  fill: "#6b7280",
+                  fontFamily: "monospace",
+                }}
+              />
+
+              <Tooltip
+                formatter={(v) => [`${Math.round(v)} lbs`, "Est. 1RM"]}
+                labelFormatter={(l) => new Date(l).toDateString()}
+                cursor={{ strokeDasharray: "3 3" }}
+                isAnimationActive={false}
+              />
+
+              <Line
+                type="monotone"
+                dataKey="estimated_1rm"
+                stroke="#000"
+                strokeWidth={3}
+                dot={{ r: 5 }}
+                activeDot={{ r: 7 }}
+                isAnimationActive={false}
               />
             </LineChart>
           </ResponsiveContainer>
